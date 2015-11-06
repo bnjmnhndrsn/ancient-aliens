@@ -2,25 +2,15 @@
 
 import React from 'react';
 
-let Quote = React.createClass({
-    render() {
-        return (
-            <li className="quote">
-                {this.props.content}
-            </li>
-        )
-    }
-});
-
 let QuoteList = React.createClass({    
     render() {
-        var quoteNodes = this.props.data.map(function(datum, index){
-            return (
-                <Quote content={datum.content} key={index}>
-                    {datum.content}
-                </Quote>
-            );
-        });
+        if (this.props.data.length) {
+            var quoteNodes = this.props.data.map(function(datum, index){
+                return (<li key={index}>{datum.content}</li>);
+            });
+        } else {
+            var quoteNodes = (<li>No results</li>);
+        }
         
         return (
             <ul className="quoteList">
