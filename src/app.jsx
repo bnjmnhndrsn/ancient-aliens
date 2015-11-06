@@ -2,35 +2,24 @@
 
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Router, Route, Link } from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
-
-import Header from './components/header';
-import Search from './components/search';
+import QuoteList from './components/quote'
+import quotes from './quotes'
 
 const App = React.createClass({
+    getInitialState: function(){
+        return quotes;
+    },
     render() {
         return (
             <div>
-                <Header />
                 <div className="container">
-                    <Search />
+                    <QuoteList data={this.state.data} />
                 </div>
             </div>
         );
     }
 });
 
-const AppRouter = React.createClass({
-    render() {
-        return (
-            <Router history={createBrowserHistory({queryKey: false})}>
-                <Route path="/" component={App}></Route>
-            </Router>
-        );
-    }
-});
-
 ReactDom.render((
-    <AppRouter />
+    <App />
 ), document.getElementById('app'));
